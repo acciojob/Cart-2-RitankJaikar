@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CartContex from "./CartContex";
 import products from "../productList";
 
-export default function CartProvider({children}) {
+export default function cartProvider({children}) {
     const [cart,  setCart] = useState([
         {
             id: 2,
