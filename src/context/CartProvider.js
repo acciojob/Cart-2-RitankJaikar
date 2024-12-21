@@ -50,6 +50,10 @@ export default function CartProvider({children}) {
         })
     }
 
+    function clearAll() {
+        setCart([]);
+    }
+
     useEffect(() => {
         const total= cart.reduce((acc, curr) => {
             return acc+curr.price*curr.quantity;
@@ -58,7 +62,7 @@ export default function CartProvider({children}) {
     }, [cart]);
 
     return(
-        <CartContex.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart}}>
+        <CartContex.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart, clearAll}}>
             {children}
         </CartContex.Provider>
     )
