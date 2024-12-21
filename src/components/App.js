@@ -7,7 +7,7 @@ import Navbar from "./NavBar";
 const App = () => {
 
   return (
-    <div>
+    <div id="main">
         <Navbar />
         <br /><br />
         <h2>Products:-</h2>

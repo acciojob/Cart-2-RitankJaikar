@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import cartContex from "../context/cartContex";
+import CartContex from "../context/CartContex";
 
 export default function Navbar() {
-    const {totalCart} = useContext(cartContex);
+    const {totalCart} = useContext(CartContex);
 
     return (
         <div>
