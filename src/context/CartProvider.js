@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CartContext from "./cartContex";
+import cartContext from "./cartContex";
 import products from "../productList";
 
 export default function CartProvider({children}) {
