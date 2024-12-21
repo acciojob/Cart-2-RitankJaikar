@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import cartContext from "./cartContex";
+import cartContex from "./cartContex";
 import products from "../productList";
 
 export default function CartProvider({children}) {
@@ -58,8 +58,8 @@ export default function CartProvider({children}) {
     }, [cart]);
 
     return(
-        <cartContext.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart}}>
+        <cartContex.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart}}>
             {children}
-        </cartContext.Provider>
+        </cartContex.Provider>
     )
 }

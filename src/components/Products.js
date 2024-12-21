@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import productList from "../productList";
-import cartContext from "../context/cartContex";
+import cartContex from "../context/cartContex";
 
 export default function Products() {
-    const {addToCart} = useContext(cartContext);
+    const {addToCart} = useContext(cartContex);
 
     return (
         <div style={{display: "flex", gap: "40px", flexWrap: "wrap"}}>
