@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import cartProvider from "./context/cartProvider";
-
-
+import CartProvider from "./context/CartProvider";
 
 ReactDOM.render(
-    <cartProvider>
+    <CartProvider>
         <App />
-    </cartProvider>
+    </CartProvider>
     , document.getElementById("root")
 );
