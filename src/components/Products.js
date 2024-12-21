@@ -3,7 +3,7 @@ import productList from "../productList";
 import cartContext from "../context/cartContex";
 
 export default function Products() {
-    const {addToCart} = useContext(CartContext);
+    const {addToCart} = useContext(cartContext);
 
     return (
         <div style={{display: "flex", gap: "40px", flexWrap: "wrap"}}>
