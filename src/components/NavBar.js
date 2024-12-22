@@ -5,9 +5,9 @@ export default function Navbar() {
     const {totalCart} = useContext(CartContex);
 
     return (
-        <div>
+        <nav>
             <div>Navbar</div>
             <div id="nav-cart-item-count">Total: {totalCart}</div>
-        </div>
+        </nav>
     )
 }
