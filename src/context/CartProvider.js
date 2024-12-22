@@ -15,9 +15,10 @@ export default function CartProvider({children}) {
 
     function addToCart(id) {
         setCart(currCart => {
+            let updatedCart;
             if(currCart.some(cartItem => cartItem.id === id)) {
                 // Increment the quantity of the existing item
-                return currCart.map(cartItem => 
+                updatedCart = currCart.map(cartItem => 
                     cartItem.id === id 
                         ? { ...cartItem, quantity: cartItem.quantity + 1 } 
                         : cartItem
@@ -26,14 +27,18 @@ export default function CartProvider({children}) {
             else {
                 // Add a new item to the cart
                 const product = products.find(product => product.id === id);
-                return [...currCart, {...product, quantity: 1}];
+                updatedCart = [...currCart, {...product, quantity: 1}];
             }
+            // Update totalCart after state update
+            const total = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            setTotalCart(total);
+            return updatedCart;
         })
     }
 
     function removeFromCart(id) {
         setCart(currCart => {
-            return currCart.map(cartItem => {
+            const updatedCart = currCart.map(cartItem => {
                     if(cartItem.id === id) {
                         return { ...cartItem, quantity: cartItem.quantity - 1 }
                     }
@@ -41,15 +46,26 @@ export default function CartProvider({children}) {
                 }
             )
             .filter(cartItem => cartItem.quantity>0);
+
+            // Update totalCart after state update
+            const total = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            setTotalCart(total);
+            return updatedCart;
         })
     }
 
     function deleteFromCart(id) {
-        setCart(currCart => currCart.filter(cartItem => cartItem.id !==id))
+        setCart(currCart => {
+            const updatedCart = currCart.filter(cartItem => cartItem.id !==id);
+            const total = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            setTotalCart(total);
+            return updatedCart;
+        })
     }
 
     function clearAll() {
         setCart([]);
+        setTotalCart(0);
     }
 
     useEffect(() => {
