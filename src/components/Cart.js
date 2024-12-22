@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import CartContex from "../context/CartContex";
 
 export default function Cart() {
-    const {cart, totalCart, addToCart, removeFromCart, clearAll} = useContext(CartContex);
+    const {cart, totalCart, addToCart, removeFromCart, clearAll, deleteFromCart} = useContext(CartContex);
 
     return (
         <div>
@@ -20,6 +20,8 @@ export default function Cart() {
                                     <button onClick={() => addToCart(item.id)} id={`increment-btn-${item.id}`}>+</button>
                                     &nbsp;&nbsp;
                                     <button onClick={() => removeFromCart(item.id)} id={`decrement-btn-${item.id}`}>-</button>
+                                    <br />
+                                    <button onClick={() => deleteFromCart(item.id)} id={`cart-item-remove-${item.id}`}>Remove</button>
                                     <br/><br/>
                                 </div>
                             )

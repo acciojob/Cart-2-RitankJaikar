@@ -51,6 +51,10 @@ export default function CartProvider({children}) {
         })
     }
 
+    function deleteFromCart(id) {
+        setCart(currCart => currCart.filter(cartItem => cartItem.id !==id))
+    }
+
     function clearAll() {
         setCart([]);
     }
@@ -63,7 +67,7 @@ export default function CartProvider({children}) {
     }, [cart]);
 
     return(
-        <CartContex.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart, clearAll}}>
+        <CartContex.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart, clearAll, deleteFromCart}}>
             {children}
         </CartContex.Provider>
     )
