@@ -6,7 +6,7 @@ export default function Navbar() {
 
     return (
         <nav>
-            <div>Navbar</div>
+            <div>useReducer</div>
             <div id="nav-cart-item-count">Total: {totalCart}</div>
         </nav>
     )
