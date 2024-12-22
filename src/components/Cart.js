@@ -5,11 +5,11 @@ export default function Cart() {
     const {cart, totalCart, addToCart, removeFromCart, clearAll, deleteFromCart} = useContext(CartContex);
 
     return (
-        <div>
+        <div id="cart-items-list">
             {
                 cart.length !== 0 
                 ?
-                <div id="cart-items-list">
+                <div>
                    {
                         cart.map(item => {
                             return (

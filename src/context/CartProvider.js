@@ -3,7 +3,12 @@ import CartContex from "./CartContex";
 import products from "../productList";
 
 export default function CartProvider({ children }) {
-    const [cart, setCart] = useState([]); // Start with an empty cart
+    const [cart, setCart] = useState([{
+        id: 1,
+        name: "Samsung Galaxy S7",
+        price: 600,
+        quantity: 1
+    }]);
     const [totalCart, setTotalCart] = useState(0);
 
     // Function to recalculate the total cart amount
