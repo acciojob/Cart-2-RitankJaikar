@@ -2,82 +2,70 @@ import React, { useEffect, useState } from "react";
 import CartContex from "./CartContex";
 import products from "../productList";
 
-export default function CartProvider({children}) {
-    const [cart,  setCart] = /*useState([]);*/ useState([
-        {
-            id: 1,
-            name: "Google Pixel",
-            price: 500,
-            quantity: 2,
-        }
-    ]);
+export default function CartProvider({ children }) {
+    const [cart, setCart] = useState([]); // Start with an empty cart
     const [totalCart, setTotalCart] = useState(0);
 
-    function addToCart(id) {
-        setCart(currCart => {
-            let updatedCart;
-            if(currCart.some(cartItem => cartItem.id === id)) {
-                // Increment the quantity of the existing item
-                updatedCart = currCart.map(cartItem => 
-                    cartItem.id === id 
-                        ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+    // Function to recalculate the total cart amount
+    const calculateTotal = (cartItems) => {
+        return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    };
+
+    // Add an item to the cart or increment its quantity
+    const addToCart = (id) => {
+        setCart((currCart) => {
+            const updatedCart = currCart.some((cartItem) => cartItem.id === id)
+                ? currCart.map((cartItem) =>
+                      cartItem.id === id
+                          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                          : cartItem
+                  )
+                : [...currCart, { ...products.find((product) => product.id === id), quantity: 1 }];
+            setTotalCart(calculateTotal(updatedCart));
+            return updatedCart;
+        });
+    };
+
+    // Decrement the quantity of an item or remove it if quantity reaches 0
+    const removeFromCart = (id) => {
+        setCart((currCart) => {
+            const updatedCart = currCart
+                .map((cartItem) =>
+                    cartItem.id === id
+                        ? { ...cartItem, quantity: cartItem.quantity - 1 }
                         : cartItem
-                );
-            }
-            else {
-                // Add a new item to the cart
-                const product = products.find(product => product.id === id);
-                updatedCart = [...currCart, {...product, quantity: 1}];
-            }
-            // Update totalCart after state update
-            const total = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            setTotalCart(total);
+                )
+                .filter((cartItem) => cartItem.quantity > 0);
+            setTotalCart(calculateTotal(updatedCart));
             return updatedCart;
-        })
-    }
+        });
+    };
 
-    function removeFromCart(id) {
-        setCart(currCart => {
-            const updatedCart = currCart.map(cartItem => {
-                    if(cartItem.id === id) {
-                        return { ...cartItem, quantity: cartItem.quantity - 1 }
-                    }
-                    return cartItem;
-                }
-            )
-            .filter(cartItem => cartItem.quantity>0);
-
-            // Update totalCart after state update
-            const total = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            setTotalCart(total);
+    // Delete an item from the cart
+    const deleteFromCart = (id) => {
+        setCart((currCart) => {
+            const updatedCart = currCart.filter((cartItem) => cartItem.id !== id);
+            setTotalCart(calculateTotal(updatedCart));
             return updatedCart;
-        })
-    }
+        });
+    };
 
-    function deleteFromCart(id) {
-        setCart(currCart => {
-            const updatedCart = currCart.filter(cartItem => cartItem.id !==id);
-            const total = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            setTotalCart(total);
-            return updatedCart;
-        })
-    }
-
-    function clearAll() {
+    // Clear the entire cart
+    const clearAll = () => {
         setCart([]);
         setTotalCart(0);
-    }
+    };
 
+    // Ensure `totalCart` is always updated when `cart` changes (fallback)
     useEffect(() => {
-        const total= cart.reduce((acc, curr) => {
-            return acc+curr.price*curr.quantity;
-        }, 0);
-        setTotalCart(total);
+        setTotalCart(calculateTotal(cart));
     }, [cart]);
 
-    return(
-        <CartContex.Provider value={{cart, setCart, addToCart, removeFromCart, totalCart, clearAll, deleteFromCart}}>
+    return (
+        <CartContex.Provider
+            value={{ cart, setCart, addToCart, removeFromCart, totalCart, clearAll, deleteFromCart }}
+        >
             {children}
         </CartContex.Provider>
-    )
+    );
 }
