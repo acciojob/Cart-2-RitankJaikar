@@ -9,19 +9,21 @@ export default function Cart() {
             {
                 cart.length !== 0 
                 ?
-                cart.map(item => {
-                    return (
-                        <div key={item.id}>
-                            <div>Name: {item.name}</div>
-                            <div>Quantity: {item.quantity}</div>
-                            <div id={`cart-item-price-${item.id}`}>Price: {item.price}</div>
-                            <button onClick={() => addToCart(item.id)} id={`increment-btn-${item.id}`}>+</button>
-                            &nbsp;&nbsp;
-                            <button onClick={() => removeFromCart(item.id)} id={`decrement-btn-${item.id}`}>-</button>
-                            <br/><br/>
-                        </div>
-                    )
-                })
+                <div id="cart-items-list">
+                   {cart.map(item => {
+                        return (
+                            <div key={item.id}>
+                                <div>Name: {item.name}</div>
+                                <div>Quantity: {item.quantity}</div>
+                                <div id={`cart-item-price-${item.id}`}>Price: {item.price}</div>
+                                <button onClick={() => addToCart(item.id)} id={`increment-btn-${item.id}`}>+</button>
+                                &nbsp;&nbsp;
+                                <button onClick={() => removeFromCart(item.id)} id={`decrement-btn-${item.id}`}>-</button>
+                                <br/><br/>
+                            </div>
+                        )
+                    })}
+                </div>
                 :
                 <div>Cart is currently empty</div>
             }

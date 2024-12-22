@@ -3,20 +3,21 @@ import CartContex from "./CartContex";
 import products from "../productList";
 
 export default function CartProvider({children}) {
-    const [cart,  setCart] = useState([
-        {
-            id: 2,
-            name: "Google Pixel",
-            price: 500,
-            quantity: 2,
-        },
-        {
-            id: 3,
-            name: "Xiaomi Redmi Note 2",
-            price: 700,
-            quantity: 1,
-        }
-    ]);
+    const [cart,  setCart] = useState([]);
+    // useState([
+    //     {
+    //         id: 2,
+    //         name: "Google Pixel",
+    //         price: 500,
+    //         quantity: 2,
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Xiaomi Redmi Note 2",
+    //         price: 700,
+    //         quantity: 1,
+    //     }
+    // ]);
     const [totalCart, setTotalCart] = useState(0);
 
     function addToCart(id) {
