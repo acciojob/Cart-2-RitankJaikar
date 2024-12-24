@@ -3,13 +3,15 @@ import CartContex from "./CartContex";
 import products from "../productList";
 
 export default function CartProvider({ children }) {
-    const [cart, setCart] = useState([{
-        id: 1,
-        name: "Samsung Galaxy S7",
-        price: 600,
-        quantity: 1
-    }]);
+    const [cart, setCart] = useState([]);
+    // useState([{
+    //     id: 1,
+    //     name: "Samsung Galaxy S7",
+    //     price: 600,
+    //     quantity: 1
+    // }]);
     const [totalCart, setTotalCart] = useState(0);
+    const [totalItem, setTotalItem] = useState(0);
 
     // Function to recalculate the total cart amount
     const calculateTotal = (cartItems) => {
@@ -27,6 +29,7 @@ export default function CartProvider({ children }) {
                   )
                 : [...currCart, { ...products.find((product) => product.id === id), quantity: 1 }];
             setTotalCart(calculateTotal(updatedCart));
+            setTotalItem(updatedCart.length);
             return updatedCart;
         });
     };
@@ -42,6 +45,7 @@ export default function CartProvider({ children }) {
                 )
                 .filter((cartItem) => cartItem.quantity > 0);
             setTotalCart(calculateTotal(updatedCart));
+            setTotalItem(updatedCart.length);
             return updatedCart;
         });
     };
@@ -51,6 +55,7 @@ export default function CartProvider({ children }) {
         setCart((currCart) => {
             const updatedCart = currCart.filter((cartItem) => cartItem.id !== id);
             setTotalCart(calculateTotal(updatedCart));
+            setTotalItem(updatedCart.length);
             return updatedCart;
         });
     };
@@ -59,16 +64,18 @@ export default function CartProvider({ children }) {
     const clearAll = () => {
         setCart([]);
         setTotalCart(0);
+        setTotalItem(0);
     };
 
     // Ensure `totalCart` is always updated when `cart` changes (fallback)
     useEffect(() => {
         setTotalCart(calculateTotal(cart));
+        setTotalItem(cart.length);
     }, [cart]);
 
     return (
         <CartContex.Provider
-            value={{ cart, setCart, addToCart, removeFromCart, totalCart, clearAll, deleteFromCart }}
+            value={{ cart, setCart, addToCart, removeFromCart, totalCart, clearAll, deleteFromCart, totalItem }}
         >
             {children}
         </CartContex.Provider>

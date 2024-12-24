@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import CartContex from "../context/CartContex";
 
 export default function Cart() {
-    const {cart, totalCart, addToCart, removeFromCart, clearAll, deleteFromCart} = useContext(CartContex);
+    const {cart, totalCart, addToCart, removeFromCart, clearAll, deleteFromCart, totalItem} = useContext(CartContex);
 
     return (
         <div id="cart-items-list">
@@ -35,7 +35,7 @@ export default function Cart() {
             <button onClick={clearAll} id="clear-all-cart">Clear Cart</button>
             <br />
             <div id="cart-total-amount">
-                Total: {totalCart}
+                {totalItem}
             </div>
         </div>
     )
