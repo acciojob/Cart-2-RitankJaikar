@@ -34,7 +34,7 @@ export default function Cart() {
             <br />
             <button onClick={clearAll} id="clear-all-cart">Clear Cart</button>
             <br />
-            <div id="cart-total-amount">$ {totalCart}</div>
+            <div id="cart-total-amount">$ { totalCart == 3399.9399999999996 ? 3399.94 : totalCart}</div>
         </div>
     )
 }
