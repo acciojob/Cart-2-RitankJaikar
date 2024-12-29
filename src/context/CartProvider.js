@@ -3,7 +3,14 @@ import CartContex from "./CartContex";
 import products from "../productList";
 
 export default function CartProvider({ children }) {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([
+        {
+            id: 1,
+            name: "Samsung Galaxy S7",
+            price: 600,
+            quantity: 3
+        }
+    ]);
     // useState([{
     //     id: 1,
     //     name: "Samsung Galaxy S7",
