@@ -8,8 +8,9 @@ export default function CartProvider({ children }) {
             id: 1,
             name: "Samsung Galaxy S7",
             price: 600,
-            quantity: 1
-        },{
+            quantity: 1,
+        },
+        {
             id: 2,
             name: "Google Pixel",
             price: 500,
@@ -20,20 +21,20 @@ export default function CartProvider({ children }) {
             name: "Xiaomi Redmi Note 2",
             price: 700,
             quantity: 1,
-        }
+        },
     ]);
-    // useState([{
-    //     id: 1,
-    //     name: "Samsung Galaxy S7",
-    //     price: 600,
-    //     quantity: 1
-    // }]);
+
     const [totalCart, setTotalCart] = useState(0);
     const [totalItem, setTotalItem] = useState(0);
 
     // Function to recalculate the total cart amount
     const calculateTotal = (cartItems) => {
         return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    };
+
+    // Function to calculate the total number of items in the cart
+    const calculateTotalItems = (cartItems) => {
+        return cartItems.reduce((acc, item) => acc + item.quantity, 0);
     };
 
     // Add an item to the cart or increment its quantity
@@ -47,7 +48,7 @@ export default function CartProvider({ children }) {
                   )
                 : [...currCart, { ...products.find((product) => product.id === id), quantity: 1 }];
             setTotalCart(calculateTotal(updatedCart));
-            setTotalItem(updatedCart.length);
+            setTotalItem(calculateTotalItems(updatedCart)); // Update totalItem
             return updatedCart;
         });
     };
@@ -63,7 +64,7 @@ export default function CartProvider({ children }) {
                 )
                 .filter((cartItem) => cartItem.quantity > 0);
             setTotalCart(calculateTotal(updatedCart));
-            setTotalItem(updatedCart.length);
+            setTotalItem(calculateTotalItems(updatedCart)); // Update totalItem
             return updatedCart;
         });
     };
@@ -73,7 +74,7 @@ export default function CartProvider({ children }) {
         setCart((currCart) => {
             const updatedCart = currCart.filter((cartItem) => cartItem.id !== id);
             setTotalCart(calculateTotal(updatedCart));
-            setTotalItem(updatedCart.length);
+            setTotalItem(calculateTotalItems(updatedCart)); // Update totalItem
             return updatedCart;
         });
     };
@@ -85,15 +86,24 @@ export default function CartProvider({ children }) {
         setTotalItem(0);
     };
 
-    // Ensure `totalCart` is always updated when `cart` changes (fallback)
+    // Ensure `totalCart` and `totalItem` are always updated when `cart` changes
     useEffect(() => {
         setTotalCart(calculateTotal(cart));
-        setTotalItem(cart.length);
+        setTotalItem(calculateTotalItems(cart)); // Update totalItem
     }, [cart]);
 
     return (
         <CartContex.Provider
-            value={{ cart, setCart, addToCart, removeFromCart, totalCart, clearAll, deleteFromCart, totalItem }}
+            value={{
+                cart,
+                setCart,
+                addToCart,
+                removeFromCart,
+                totalCart,
+                clearAll,
+                deleteFromCart,
+                totalItem,
+            }}
         >
             {children}
         </CartContex.Provider>
