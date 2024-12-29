@@ -4,7 +4,7 @@ const products = [
   {
     id: 1,
     title: "Samsung Galaxy S7",
-    price: 599.94,
+    price: 600,
     img: "https://res.cloudinary.com/diqqf3eq2/image/upload/v1583368215/phone-2_ohtt5s.png",
     amount: 1,
   },
@@ -18,7 +18,7 @@ const products = [
   {
     id: 3,
     title: "Xiaomi Redmi Note 2",
-    price: 700,
+    price: 699.94,
     img: "https://res.cloudinary.com/diqqf3eq2/image/upload/v1583368224/phone-3_h2s6fo.png",
     amount: 1,
   },

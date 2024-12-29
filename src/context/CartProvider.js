@@ -7,7 +7,7 @@ export default function CartProvider({ children }) {
         {
             id: 1,
             name: "Samsung Galaxy S7",
-            price: 599.94,
+            price: 600,
             quantity: 1,
         },
         {
@@ -19,7 +19,7 @@ export default function CartProvider({ children }) {
         {
             id: 3,
             name: "Xiaomi Redmi Note 2",
-            price: 700,
+            price: 699.94,
             quantity: 1,
         },
     ]);
