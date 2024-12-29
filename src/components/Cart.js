@@ -15,7 +15,7 @@ export default function Cart() {
                             return (
                                 <div key={item.id}>
                                     <div>Name: {item.name}</div>
-                                    <div>Quantity: {item.quantity}</div>
+                                    <div id={`cart-amount-${item.id}`}>{item.quantity}</div>
                                     <div id={`cart-item-price-${item.id}`}>Price: {item.price}</div>
                                     <button onClick={() => addToCart(item.id)} id={`increment-btn-${item.id}`}>+</button>
                                     &nbsp;&nbsp;
