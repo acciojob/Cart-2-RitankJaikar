@@ -34,9 +34,7 @@ export default function Cart() {
             <br />
             <button onClick={clearAll} id="clear-all-cart">Clear Cart</button>
             <br />
-            <div id="cart-total-amount">
-                {totalItem}
-            </div>
+            <div id="cart-total-amount">$ {totalCart}</div>
         </div>
     )
 }
