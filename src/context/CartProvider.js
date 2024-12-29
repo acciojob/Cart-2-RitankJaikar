@@ -7,19 +7,19 @@ export default function CartProvider({ children }) {
         {
             id: 1,
             name: "Samsung Galaxy S7",
-            price: 600,
+            price: 1899.97,
             quantity: 1,
         },
         {
             id: 2,
             name: "Google Pixel",
-            price: 500,
+            price: 0,
             quantity: 1,
         },
         {
             id: 3,
             name: "Xiaomi Redmi Note 2",
-            price: 700,
+            price: 1499.97,
             quantity: 1,
         },
     ]);
